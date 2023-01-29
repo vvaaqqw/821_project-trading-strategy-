@@ -1,1 +1,1 @@
-# MF821_project-trading-strategy-
+# 821 strategy
