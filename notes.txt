@@ -1,3 +1,4 @@
+后期可以考虑从tws api里查询更多数据
 可以加入止盈和止损策略。
 可以加入SVM机器学习
 有一篇因子有效性的文章可以参考。https://qiniu-images.datayes.com/uqer/dongfang22.pdf
