@@ -4,3 +4,21 @@
 IC最大值为1，表示该因子选股100%准确，对应的排名分最高的股票，选出来的股票在下格调仓周期中涨幅最大；反之-1，则是反向指标。实际中对于多年的IC均值，当 I C > 0.05 IC>0.05 IC>0.05时，就可以视为有效因子，当 I C > 0.1 IC>0.1 IC>0.1，就可以认为是很好的阿尔法因子了。当IC均值接近0，可视为无效因子。
 IR大于0.5时，因子稳定获取超额收益的能力较强。
 
+第一时间段： BP_LF, EP_TTM, SP_TTM, CFP_TTM EBIT2EV, Sales2EV, ROA, ROE, SalesGROWth_Qr_YOY, AssetTurnover, Momentumave1M, RealizedVolatility_3M, MaxRet
+第二时间段： CFP_TTM, SP_TTM, EBIT2EV, Sales2EV, ROA, ROE, SalesGROWth_Qr_YOY, OCFGrowth_YOY, AssetTurnover, Momentumave1M
+第三时间段： EP_TTM, SP_TTM, CFP_TTM, EBIT2EV, Sales2EV, ROA, ROE, AssetTurnover, Momentumave1M, RealizedVolatility_3M, MaxRet
+
+Professor: Philip Sun  Email: dsun1@bu.edu
+Teaching Assistant: Liyan Wang  Email: lyanwong@bu.edu
+日常汇报工作的会议:
+schedule check-in team meetings with professor(meet in person)
+
+IBKR:individual account可以做测试，team account才是重点
+交易时间：（2月1号）feb 1st -- the day before final
+
+Initial Presentation: 
+1月27日做一个最初的小组策略，
+2月3号做小组presentation
+1. slides submitted by submission ddl
+2. in class presentation
+3. submit python code
