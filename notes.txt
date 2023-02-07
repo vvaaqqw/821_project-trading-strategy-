@@ -1,7 +1,7 @@
-选4，1
 2月17日之前完成转型
 2月17日之后和老师约时间meeting
 后期可以考虑从tws api里查询更多数据
+有时间可以写个backtesting
 改成多因子策略
 可以加入止盈和止损策略。
 可以加入SVM机器学习
@@ -15,6 +15,35 @@ IR大于0.5时，因子稳定获取超额收益的能力较强。
 第二时间段： CFP_TTM, SP_TTM, EBIT2EV, Sales2EV, ROA, ROE, SalesGROWth_Qr_YOY, OCFGrowth_YOY, AssetTurnover, Momentumave1M
 第三时间段： EP_TTM, SP_TTM, CFP_TTM, EBIT2EV, Sales2EV, ROA, ROE, AssetTurnover, Momentumave1M, RealizedVolatility_3M, MaxRet
 
+TTM = Trailing Twelve Months TM 数据是一个滚动概念，每个季度都会不同。
+EPS(TTM)是截止到这个季度的前12个月每股收益
+EP因子:TTM earnings/ MarketCap
+BP_LF: Book Value/Market Cap
+SP_TTM:TTM Sales/ Market Cap 
+CFP_TTM TTM Operating Cash Flow / Market Cap
+EBIT2EV EBIT/Enterprise Value
+Sales2EV 营业收入_TTM / (总市值+非流劢负债合计_最新财报-货币资金_最新财报)
+ROA 总资产收益率
+ROE 净资产收益率
+GrossMargin 销售毛利率
+SalesGrowth_Qr_YOY 营业收入增长率（季度同比）
+ProfitGrowth_Qr_YOY 净利润增长率（季度同比）
+OCFGrowth_YOY 经营现金流增长率（同比）
+AssetTurnover 总资产周转率
+Debt2Asset 债务资产比例
+TO_1M 以流通股本计算的1个月日均换手率
+ILLIQ 每天一个亿成交量能推劢的股价涨幅
+AmountAvg_1M_3M 过去一个月日均成交额/过去三个月日均成交额
+Ret1M 1个月收益反转
+Momentumlast6M 复权收盘价/复权收盘价_6月前-1
+Momentumave1M 股价相比最近1个月均价涨幅
+PPReversal 乒乓球反转因子
+CGO_3M Capital Gains Overhang (3M)
+RealizedVolatility_3M 过去三个月日收益率数据计算的标准差
+MaxRet 上月最大日收益
+
+
+
 Professor: Philip Sun  Email: dsun1@bu.edu
 Teaching Assistant: Liyan Wang  Email: lyanwong@bu.edu
 日常汇报工作的会议:
@@ -23,9 +52,113 @@ schedule check-in team meetings with professor(meet in person)
 IBKR:individual account可以做测试，team account才是重点
 交易时间：（2月1号）feb 1st -- the day before final
 
-Initial Presentation: 
-1月27日做一个最初的小组策略，
-2月3号做小组presentation
-1. slides submitted by submission ddl
-2. in class presentation
-3. submit python code
+yfinance
+In [7]: balance_sheet
+Out[7]:
+                                                        2022-09-30  ...      2019-09-30
+Total Assets                                        352755000000.0  ...  338516000000.0
+Current Assets                                      135405000000.0  ...  162819000000.0
+Cash Cash Equivalents And Short Term Investments     48304000000.0  ...  100557000000.0
+Cash And Cash Equivalents                            23646000000.0  ...   48844000000.0
+Cash Financial                                       18546000000.0  ...   12204000000.0
+Cash Equivalents                                      5100000000.0  ...   36640000000.0
+Other Short Term Investments                         24658000000.0  ...   51713000000.0
+Receivables                                          60932000000.0  ...   45804000000.0
+Accounts Receivable                                  28184000000.0  ...   22926000000.0
+Other Receivables                                    32748000000.0  ...   22878000000.0
+Inventory                                             4946000000.0  ...    4106000000.0
+Other Current Assets                                 21223000000.0  ...   12352000000.0
+Total Non Current Assets                            217350000000.0  ...  175697000000.0
+Net PPE                                              42117000000.0  ...   37378000000.0
+Gross PPE                                           114457000000.0  ...   95957000000.0
+Properties                                                     0.0  ...             0.0
+Land And Improvements                                22126000000.0  ...   17085000000.0
+Machinery Furniture Equipment                        81060000000.0  ...   69797000000.0
+Leases                                               11271000000.0  ...    9075000000.0
+Accumulated Depreciation                            -72340000000.0  ...  -58579000000.0
+Investments And Advances                            120805000000.0  ...  105341000000.0
+Investmentin Financial Assets                       120805000000.0  ...  105341000000.0
+Available For Sale Securities                       120805000000.0  ...  105341000000.0
+Other Investments                                   120805000000.0  ...  105341000000.0
+Other Non Current Assets                             54428000000.0  ...   32978000000.0
+Total Liabilities Net Minority Interest             302083000000.0  ...  248028000000.0
+Current Liabilities                                 153982000000.0  ...  105718000000.0
+Payables And Accrued Expenses                        64115000000.0  ...   46236000000.0
+Payables                                             64115000000.0  ...   46236000000.0
+Accounts Payable                                     64115000000.0  ...   46236000000.0
+Current Debt And Capital Lease Obligation            21110000000.0  ...   16240000000.0
+Current Debt                                         21110000000.0  ...   16240000000.0
+Commercial Paper                                      9982000000.0  ...    5980000000.0
+Other Current Borrowings                             11128000000.0  ...   10260000000.0
+Current Deferred Liabilities                          7912000000.0  ...    5522000000.0
+Current Deferred Revenue                              7912000000.0  ...    5522000000.0
+Other Current Liabilities                            60845000000.0  ...   37720000000.0
+Total Non Current Liabilities Net Minority Inte...  148101000000.0  ...  142310000000.0
+Long Term Debt And Capital Lease Obligation          98959000000.0  ...   91807000000.0
+Long Term Debt                                       98959000000.0  ...   91807000000.0
+Tradeand Other Payables Non Current                  16657000000.0  ...   29545000000.0
+Other Non Current Liabilities                        32485000000.0  ...   20958000000.0
+Total Equity Gross Minority Interest                 50672000000.0  ...   90488000000.0
+Stockholders Equity                                  50672000000.0  ...   90488000000.0
+Capital Stock                                        64849000000.0  ...   45174000000.0
+Common Stock                                         64849000000.0  ...   45174000000.0
+Retained Earnings                                    -3068000000.0  ...   45898000000.0
+Gains Losses Not Affecting Retained Earnings        -11109000000.0  ...    -584000000.0
+Total Capitalization                                149631000000.0  ...  182295000000.0
+Common Stock Equity                                  50672000000.0  ...   90488000000.0
+Net Tangible Assets                                  50672000000.0  ...   90488000000.0
+Working Capital                                     -18577000000.0  ...   57101000000.0
+Invested Capital                                    170741000000.0  ...  198535000000.0
+Tangible Book Value                                  50672000000.0  ...   90488000000.0
+Total Debt                                          120069000000.0  ...  108047000000.0
+Net Debt                                             96423000000.0  ...   59203000000.0
+Share Issued                                         15943425000.0  ...   17772944000.0
+Ordinary Shares Number                               15943425000.0  ...   17772944000.0
+
+[58 rows x 4 columns]
+------------------------------------------------
+# Print the financial statements data
+   ...: print(financials)
+                                                        2022-09-30  ...      2019-09-30
+Total Revenue                                       394328000000.0  ...  260174000000.0
+Operating Revenue                                   394328000000.0  ...  260174000000.0
+Cost Of Revenue                                     223546000000.0  ...  161782000000.0
+Gross Profit                                        170782000000.0  ...   98392000000.0
+Operating Expense                                    51345000000.0  ...   34462000000.0
+Selling General And Administration                   25094000000.0  ...   18245000000.0
+Research And Development                             26251000000.0  ...   16217000000.0
+Operating Income                                    119437000000.0  ...   63930000000.0
+Net Non Operating Interest Income Expense             -106000000.0  ...    1385000000.0
+Interest Income Non Operating                         2825000000.0  ...    4961000000.0
+Interest Expense Non Operating                        2931000000.0  ...    3576000000.0
+Other Income Expense                                  -228000000.0  ...     422000000.0
+Other Non Operating Income Expenses                   -228000000.0  ...     422000000.0
+Pretax Income                                       119103000000.0  ...   65737000000.0
+Tax Provision                                        19300000000.0  ...   10481000000.0
+Net Income Common Stockholders                       99803000000.0  ...   55256000000.0
+Net Income                                           99803000000.0  ...   55256000000.0
+Net Income Including Noncontrolling Interests        99803000000.0  ...   55256000000.0
+Net Income Continuous Operations                     99803000000.0  ...   55256000000.0
+Diluted NI Availto Com Stockholders                  99803000000.0  ...   55256000000.0
+Basic EPS                                                      NaN  ...          2.9925
+Diluted EPS                                                    NaN  ...          2.9725
+Basic Average Shares                                           NaN  ...   18471336000.0
+Diluted Average Shares                                         NaN  ...   18595652000.0
+Total Operating Income As Reported                  119437000000.0  ...   63930000000.0
+Total Expenses                                      274891000000.0  ...  196244000000.0
+Net Income From Continuing And Discontinued Ope...   99803000000.0  ...   55256000000.0
+Normalized Income                                    99803000000.0  ...   55256000000.0
+Interest Income                                       2825000000.0  ...    4961000000.0
+Interest Expense                                      2931000000.0  ...    3576000000.0
+Net Interest Income                                   -106000000.0  ...    1385000000.0
+EBIT                                                122034000000.0  ...   69313000000.0
+Reconciled Cost Of Revenue                          223546000000.0  ...  161782000000.0
+Reconciled Depreciation                              11104000000.0  ...   12547000000.0
+Net Income From Continuing Operation Net Minori...   99803000000.0  ...   55256000000.0
+Normalized EBITDA                                   133138000000.0  ...   81860000000.0
+Tax Rate For Calcs                                           0.162  ...           0.159
+Tax Effect Of Unusual Items                                    0.0  ...             0.0
+
+[38 rows x 4 columns]
+
+
