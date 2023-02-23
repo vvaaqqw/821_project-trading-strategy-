@@ -1,2 +1,3 @@
 tmp
 SP500_data.pkl
+rf_model.joblib
