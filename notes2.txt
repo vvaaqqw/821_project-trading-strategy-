@@ -10,6 +10,13 @@ TODOS:
 equal weight 改成 based on risk
 
 
+-------------------------------------------
+
+F1 score	Interpretation
+> 0.9	Very good
+0.8 - 0.9	Good
+0.5 - 0.8	OK
+< 0.5	Not good
 
 
 
