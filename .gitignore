@@ -1,5 +1,6 @@
 tmp
 SP500_data.pkl
+model
 rf_model.joblib
 rf_model_v2.joblib
 rf_model_2.joblib
